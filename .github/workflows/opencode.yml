@@ -1,11 +1,9 @@
 name: opencode
-
 on:
   issue_comment:
     types: [created]
   pull_request_review_comment:
     types: [created]
-
 jobs:
   opencode:
     if: |
@@ -22,15 +20,13 @@ jobs:
            persist-credentials: false
 
        - name: Run OpenCode
-        uses: anomalyco/opencode/github@latest
-        env:
+         uses: anomalyco/opencode/github@latest
+         env:
           ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
-        with:
+         with:
           model: Z.AI/GLM-4.5
           prompt: |
             Review this issue. If there's a clear fix or relevant docs:
             - Provide documentation links
             - Add error handling guidance for code examples
             Otherwise, do not comment.
-          # share: true
-          # github_token: xxxx
